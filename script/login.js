@@ -1,79 +1,64 @@
-// // Function 1--- for lesson levels
-// function loadLessonLevel() {
-//     fetch("https://openapi.programming-hero.com/api/levels/all")
-//         .then(res => res.json())
-//         .then(data => displayLoadLessonLevel(data.data))
-//         .catch(error => console.error("Error loading lesson levels:", error));
-// }
+document.addEventListener("DOMContentLoaded", function () {
+    // Initially hide vocabulary and FAQ sections
+    document.getElementById("navbar").style.opacity = "0";
+    document.getElementById("navbar").style.visibility = "hidden";
+   
+    document.getElementById("learn").style.display = "none";
+    document.getElementById("faq").style.display = "none";
+   
 
-// // Function to display lesson levels
-// function displayLoadLessonLevel(data) {
-//     const levelContainer = document.getElementById("level-container");
-//     levelContainer.innerHTML = "";  
+    document.getElementById("details").style.display = "none";
+  
 
-//     for (const levData of data) {
-//         console.log(levData);
+    document.getElementById("login-btn").addEventListener("click", function (event) {
+        event.preventDefault();
 
-//         const levelDiv = document.createElement("div");
-//         levelDiv.innerHTML = `
-//         <button class="btn border-[#422AD5] bg-white text-[#422AD5]" data-level="${levData.level_no}">
-//             <i class="fas fa-book-open"></i> Lesson -${levData.level_no}
-//         </button>
-//         `;
-     
-//         levelDiv.querySelector("button").addEventListener("click", function () {
-//             const level = this.getAttribute("data-level"); 
-//             loadLesson(level); 
-//         });
+        const user = document.getElementById("user").value;
+        const pin = document.getElementById("pin").value;
 
-//         levelContainer.appendChild(levelDiv);
-//     }
-// }
+        if (pin === "123456") {
+            
+            document.getElementById("banner-sec").style.display = "none";
 
-// // Function-2 to load lessons based on level
-// function loadLesson(level) {
-//     fetch(`https://openapi.programming-hero.com/api/level/${level}`)
-//         .then(res => res.json())
-//         .then(data => displayLoadLesson(data.data))
-//         .catch(error => console.error(`Error loading lessons for level ${level}:`, error));
-// }
+            document.getElementById("navbar").style.opacity = "1";
+            document.getElementById("navbar").style.visibility = "visible";
+        
+            document.getElementById("learn").style.display = "block";
+            document.getElementById("faq").style.display = "block";
+            document.getElementById("details").style.display = "block";
 
-// // Function to display lessons
-// const displayLoadLesson = (lessons) => {
-//     const cardContainer = document.getElementById("card-container");
-//     cardContainer.innerHTML = ""; 
+            Swal.fire({
+                icon: "success",
+                title: "সাফল্য!",
+                text: "আপনি সফলভাবে লগইন করেছেন।",
+                confirmButtonText: "ঠিক আছে",
+            });
 
-//     for (const lesson of lessons) {
-//         console.log(lesson);
+        } else {
+            // Show error alert
+            Swal.fire({
+                icon: "error",
+                title: "ভুল পাসওয়ার্ড!",
+                text: "দয়া করে আবার চেষ্টা করুন।",
+                confirmButtonText: "ঠিক আছে",
+            });
+        };
 
-//         const videoCard = document.createElement("div");
-//         videoCard.innerHTML = `
-//         <div class="mt-10">
-//             <div class="card bg-base-100 card-md shadow-sm">
-//                 <div class="card-body">
-//                     <h2 class="text-xl font-bold text-[#18181B] text-center">${lesson.word}</h2>
-//                     <p class="text-xl font-medium text-[#000000] text-center">Meaning / Pronunciation</p>
-//                     <h3 class="font-semibold text-2xl text-[#18181B] text-center font-Hind-Siliguri">
-//                         ${lesson.meaning} / ${lesson.pronunciation}
-//                     </h3>
-//                     <div class="flex justify-between ">
-//                         <button class="bg-[#1A91FF10] w-[56px] h-[56px] rounded">
-//                             <i class="fas fa-info-circle text-[#374957]"></i>
-//                         </button>
-//                         <button class="bg-[#1A91FF10] w-[56px] h-[56px] rounded text-[#374957]">
-//                             <i class="fas fa-volume-up"></i>
-//                         </button>
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
-//         `;
-
-//         cardContainer.appendChild(videoCard);
-//     }
-// }
+    });
+});
 
 
-// document.addEventListener("DOMContentLoaded", () => {
-//     loadLessonLevel();
-// });
+
+document.getElementById("logoutBtn").addEventListener("click", function () {
+    document.getElementById("learn").style.display = "none";
+    document.getElementById("faq").style.display = "none";
+    document.getElementById("details").style.display = "none"; 
+    document.getElementById("navbar").style.display = "none";
+    document.getElementById("banner-sec").style.display="block";
+   
+});
+
+
+
+
+
